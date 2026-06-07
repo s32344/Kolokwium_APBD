@@ -7,15 +7,17 @@ namespace Kolokwium.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class BatchesController : ControllerBase
-{
+{ 
+    
     private readonly INurseryService _nurseryService;
 
     public BatchesController(INurseryService nurseryService)
     {
         _nurseryService = nurseryService;
+        
     }
 
-    [HttpPost]
+    [HttpPost] 
     public async Task<IActionResult> AddBatch([FromBody] AddBatchRequestDto request)
     {
         var result = await _nurseryService.AddBatchAsync(request);

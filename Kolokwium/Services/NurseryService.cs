@@ -27,6 +27,7 @@ public class NurseryService : INurseryService
         if (nursery == null) return null;
 
         return new NurseryResponseDto
+            
         {
             NurseryId = nursery.NurseryId,
             Name = nursery.Name,
@@ -59,7 +60,7 @@ public class NurseryService : INurseryService
         try
         {
             var nursery = await _context.Nurseries.FirstOrDefaultAsync(n => n.Name == request.Nursery);
-            if (nursery == null) return (404, "Szkółka leśna o podanej nazwie nie istnieje.");
+            if (nursery == null) return (404, "Szkółka o podanej nazwie nie istnieje. ");
 
             var species = await _context.TreeSpecies.FirstOrDefaultAsync(s => s.LatinName == request.Species);
             if (species == null) return (404, "Gatunek o podanej nazwie nie istnieje.");
@@ -76,6 +77,7 @@ public class NurseryService : INurseryService
                 SownDate = DateTime.Now 
             };
 
+            
             _context.SeedlingBatches.Add(newBatch);
             await _context.SaveChangesAsync();
 
@@ -88,6 +90,7 @@ public class NurseryService : INurseryService
                     Role = resp.Role
                 });
             }
+            
             
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
